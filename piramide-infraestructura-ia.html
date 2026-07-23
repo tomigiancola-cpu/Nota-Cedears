@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Las seis capas de la infraestructura de IA</title>
+<style>
+:root{
+  --bg:#faf9f7;
+  --text-primary:#0b0b0b;
+  --text-secondary:#52514e;
+  --text-muted:#898781;
+  --border:rgba(11,11,11,0.14);
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#141413;
+    --text-primary:#ffffff;
+    --text-secondary:#c3c2b7;
+    --text-muted:#898781;
+    --border:rgba(255,255,255,0.16);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  font-family:var(--font-sans);
+  color:var(--text-primary);
+  -webkit-font-smoothing:antialiased;
+  padding:2rem 1rem;
+}
+.wrap{max-width:760px;margin:0 auto}
+.head{margin:0 0 1.75rem;padding:0 4px}
+.kicker{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:8px;
+}
+h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:27px;font-weight:500;line-height:1.25;
+  margin:0;color:var(--text-primary);
+}
+.dek{
+  font-size:14px;line-height:1.6;color:var(--text-secondary);
+  margin:10px 0 0;max-width:560px;
+}
+svg{display:block;width:100%;height:auto}
+.th{font-family:var(--font-sans);font-size:14px;font-weight:500;fill:var(--text-primary)}
+.muted{fill:var(--text-muted)}
+.soft{fill:var(--text-secondary)}
+.leader{stroke:var(--border);stroke-width:.5;stroke-dasharray:2 3;fill:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="head">
+  <div class="kicker">Anatomía del ciclo · 2026</div>
+  <h1>Las seis capas de la infraestructura de IA</h1>
+</div>
+
+<svg viewBox="0 0 680 600" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Pirámide de seis capas de la infraestructura de inteligencia artificial</title>
+<desc>Seis bloques trapezoidales en perspectiva apilados sin separación, desde el capital en la base hasta el cómputo y la memoria en la cima, cada uno rotulado con su capa y las empresas representativas.</desc>
+
+<text class="th" x="340" y="36" text-anchor="middle" dominant-baseline="central">SK hynix · Nvidia · TXN · GOOG</text>
+<line class="leader" x1="340" y1="50" x2="340" y2="64"/>
+
+<polygon points="340,66 404,98 340,130 276,98" fill="#F8E271" stroke="#7A6604" stroke-width="0.5"/>
+<polygon points="276,98 340,130 340,174 276,142" fill="#DCC01F" stroke="#7A6604" stroke-width="0.5"/>
+<polygon points="340,130 404,98 404,142 340,174" fill="#AA9108" stroke="#7A6604" stroke-width="0.5"/>
+<text class="th" x="416" y="98" dominant-baseline="central">Cómputo y memoria</text>
+<text class="th muted" x="264" y="98" text-anchor="end" dominant-baseline="central">01</text>
+
+<polygon points="276,142 404,142 468,174 212,174" fill="#9BD955" stroke="#3D6A11" stroke-width="0.5"/>
+<polygon points="212,174 340,174 340,218 212,218" fill="#79BC33" stroke="#3D6A11" stroke-width="0.5"/>
+<polygon points="340,174 468,174 468,218 340,218" fill="#548A1E" stroke="#3D6A11" stroke-width="0.5"/>
+<text class="th" x="276" y="196" text-anchor="middle" dominant-baseline="central" fill="#16290A">Ciena</text>
+<text class="th" x="404" y="196" text-anchor="middle" dominant-baseline="central" fill="#EDF7E0">Coherent</text>
+<text class="th" x="480" y="174" dominant-baseline="central">Redes y conectividad</text>
+<text class="th muted" x="200" y="174" text-anchor="end" dominant-baseline="central">02</text>
+
+<polygon points="212,218 468,218 532,250 148,250" fill="#FAAE4A" stroke="#8A4E05" stroke-width="0.5"/>
+<polygon points="148,250 340,250 340,294 148,294" fill="#EE8F1B" stroke="#8A4E05" stroke-width="0.5"/>
+<polygon points="340,250 532,250 532,294 340,294" fill="#A85E0B" stroke="#8A4E05" stroke-width="0.5"/>
+<text class="th" x="244" y="272" text-anchor="middle" dominant-baseline="central" fill="#3B2102">Vertiv</text>
+<text class="th" x="436" y="272" text-anchor="middle" dominant-baseline="central" fill="#FDF0E0">Schneider</text>
+<text class="th" x="544" y="250" dominant-baseline="central">Refrigeración</text>
+<text class="th muted" x="136" y="250" text-anchor="end" dominant-baseline="central">03</text>
+
+<polygon points="148,294 532,294 580,326 100,326" fill="#6FA9E5" stroke="#1C4676" stroke-width="0.5"/>
+<polygon points="100,326 340,326 340,370 100,370" fill="#4386CE" stroke="#1C4676" stroke-width="0.5"/>
+<polygon points="340,326 580,326 580,370 340,370" fill="#265C93" stroke="#1C4676" stroke-width="0.5"/>
+<text class="th" x="220" y="348" text-anchor="middle" dominant-baseline="central" fill="#0A1E36">Hitachi Energy</text>
+<text class="th" x="460" y="348" text-anchor="middle" dominant-baseline="central" fill="#E4F0FA">Siemens Energy</text>
+<text class="th" x="592" y="326" dominant-baseline="central">Eléctrica</text>
+<text class="th muted" x="88" y="326" text-anchor="end" dominant-baseline="central">04</text>
+
+<polygon points="100,370 580,370 616,402 64,402" fill="#E24457" stroke="#6B0812" stroke-width="0.5"/>
+<polygon points="64,402 340,402 340,446 64,446" fill="#C8172A" stroke="#6B0812" stroke-width="0.5"/>
+<polygon points="340,402 616,402 616,446 340,446" fill="#8C0B16" stroke="#6B0812" stroke-width="0.5"/>
+<text class="th" x="202" y="424" text-anchor="middle" dominant-baseline="central" fill="#FCE9EB">GE Vernova · Quanta</text>
+<text class="th" x="478" y="424" text-anchor="middle" dominant-baseline="central" fill="#FCE9EB">Constellation</text>
+<text class="th" x="628" y="402" dominant-baseline="central">Energía</text>
+<text class="th muted" x="52" y="402" text-anchor="end" dominant-baseline="central">05</text>
+
+<polygon points="64,446 616,446 644,478 36,478" fill="#C9A8BE" stroke="#5C1069" stroke-width="0.5"/>
+<polygon points="36,478 340,478 340,522 36,522" fill="#A87E9C" stroke="#5C1069" stroke-width="0.5"/>
+<polygon points="340,478 644,478 644,522 340,522" fill="#74516B" stroke="#5C1069" stroke-width="0.5"/>
+<text class="th" x="188" y="500" text-anchor="middle" dominant-baseline="central" fill="#33153D">Apollo · Blackstone</text>
+<text class="th" x="492" y="500" text-anchor="middle" dominant-baseline="central" fill="#F9E8FC">Blue Owl · Morgan Stanley</text>
+<text class="th" x="656" y="478" text-anchor="end" dominant-baseline="central">Capital</text>
+<text class="th muted" x="24" y="478" text-anchor="end" dominant-baseline="central">06</text>
+
+<polygon points="36,546 644,546 660,556 52,556" fill="#A821BC" opacity="0.42"/>
+<text class="th soft" x="340" y="582" text-anchor="middle">Materiales críticos — Freeport · MP Materials · Nippon Steel</text>
+</svg>
+
+</div>
+</body>
+</html>

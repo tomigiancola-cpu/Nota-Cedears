@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultados Q2 2026 — Comparativa</title>
+<style>
+:root{
+  --surface-0:#faf9f7; --surface-1:#f1efe8; --surface-2:#ffffff;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#898781;
+  --border:rgba(11,11,11,0.10); --border-strong:rgba(11,11,11,0.20);
+  --accent:#185fa5; --neg:#d03b3b;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-serif:Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --surface-0:#141413; --surface-1:#26262410; --surface-1:#262624;
+    --surface-2:#1a1a19;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#898781;
+    --border:rgba(255,255,255,0.10); --border-strong:rgba(255,255,255,0.20);
+    --accent:#85b7eb; --neg:#e66767;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0; padding:2rem 1rem; background:var(--surface-0);
+  font-family:var(--font-sans); color:var(--text-primary);
+  font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:720px;margin:0 auto}
+.kicker{font-size:11px;letter-spacing:.08em;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase}
+h1{font-family:var(--font-serif);font-size:26px;font-weight:500;margin:0;line-height:1.3}
+.sub{font-size:13px;color:var(--text-secondary);margin-top:4px}
+.head{border-bottom:1px solid var(--border-strong);padding-bottom:14px;margin-bottom:1.5rem}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem}
+button{
+  font-family:inherit;font-size:12px;padding:6px 12px;border-radius:8px;
+  border:1px solid var(--border);background:transparent;color:var(--text-secondary);
+  cursor:pointer;transition:background .15s,border-color .15s,color .15s;
+}
+button:hover{background:var(--surface-1)}
+button.on{background:var(--surface-1);border-color:var(--accent);color:var(--accent)}
+.adjwrap{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;font-size:12px;color:var(--text-secondary)}
+.adjwrap input{accent-color:var(--accent);cursor:pointer}
+.co{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
+.dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex:none}
+.name{font-size:14px;font-weight:500}
+.tick{font-size:12px;color:var(--text-muted)}
+.row{display:flex;align-items:center;gap:10px}
+.track{flex:1;height:22px;background:var(--surface-1);border-radius:3px;overflow:hidden}
+.fill{height:100%;border-radius:0 3px 3px 0;transition:width .3s ease}
+.val{font-size:13px;font-weight:500;min-width:110px;text-align:right;font-variant-numeric:tabular-nums lining-nums}
+.grp{margin-bottom:1.25rem}
+.ylab{font-size:12px;color:var(--text-secondary);min-width:88px;flex:none}
+.ytrack{flex:1;height:14px;background:var(--surface-1);border-radius:3px;overflow:hidden}
+.yval{font-size:12px;font-weight:500;min-width:56px;text-align:right;font-variant-numeric:tabular-nums lining-nums}
+.foot{border-top:1px solid var(--border);margin-top:1.75rem;padding-top:14px}
+.note{font-size:12px;color:var(--text-secondary);line-height:1.65;margin-bottom:10px}
+.src{font-size:11px;color:var(--text-muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h2 class="sr">Comparativa de resultados del segundo trimestre de 2026 para Texas Instruments, GE Vernova, Alphabet y Tesla.</h2>
+
+<div class="head">
+  <div class="kicker">Resultados trimestrales · Q2 2026</div>
+  <h1 id="hdr">Ingresos del trimestre</h1>
+  <div class="sub" id="sub"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button data-m="rev">Ingresos</button>
+  <button data-m="ni">Utilidad neta</button>
+  <button data-m="eps">EPS</button>
+  <button data-m="om">Margen operativo</button>
+  <button data-m="yoy">Variación interanual</button>
+</div>
+
+<div class="adjwrap" id="adjwrap">
+  <input type="checkbox" id="adj" checked>
+  <label for="adj">Excluir la ganancia extraordinaria de Alphabet (USD 99.000 M)</label>
+</div>
+
+<div id="rows"></div>
+
+<div class="foot">
+  <div class="note" id="note"></div>
+  <div class="src">Fuente: SEC</div>
+</div>
+</div>
+
+<script>
+var D={
+ TXN:{n:'Texas Instruments',rev:5.46,ni:1.98,niA:1.98,eps:2.14,epsA:2.14,om:42.3,yr:23,yn:52,ye:52},
+ GEV:{n:'GE Vernova',rev:11.10,ni:0.649,niA:0.649,eps:2.47,epsA:2.47,om:11.3,yr:22,yn:32,ye:33},
+ GOOG:{n:'Alphabet',rev:119.80,ni:112.11,niA:13.11,eps:9.11,epsA:1.07,om:34.0,yr:24.2,yn:298,ye:294},
+ TSLA:{n:'Tesla',rev:28.24,ni:1.11,niA:1.11,eps:0.32,epsA:0.32,om:1.4,yr:26,yn:-5,ye:-3}
+};
+var K=['GOOG','TSLA','GEV','TXN'];
+var C={TXN:'#2a78d6',GEV:'#eb6834',GOOG:'#1baf7a',TSLA:'#eda100'};
+
+function fB(v){
+  if(v>=1) return 'USD '+v.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2})+' MM';
+  return 'USD '+Math.round(v*1000)+' M';
+}
+
+var M={
+ rev:{h:'Ingresos del trimestre',s:'En miles de millones de dólares',f:fB,
+  n:'Alphabet factura más de veinte veces lo de Texas Instruments, pero el tamaño no define la rentabilidad: TXN convierte una porción mucho mayor de cada dólar en resultado operativo.'},
+ ni:{h:'Utilidad neta',s:'Resultado atribuible bajo normas GAAP',f:fB,
+  n:'El resultado de Alphabet incluye una ganancia no recurrente de USD 99.000 millones por revaluación de participaciones, principalmente Waymo. El de Tesla se apoya en unos USD 763 millones no operativos por su tenencia en SpaceX.'},
+ eps:{h:'Ganancia por acción',s:'EPS diluido bajo normas GAAP, en dólares',f:function(v){return 'USD '+v.toFixed(2).replace('.',',')},
+  n:'Tesla registra el EPS más bajo del grupo pese a facturar cinco veces lo de Texas Instruments: el margen operativo se comprimió al 1,4 por ciento.'},
+ om:{h:'Margen operativo',s:'Resultado operativo sobre ingresos',f:function(v){return v.toFixed(1).replace('.',',')+'%'},
+  n:'Alphabet informa el resultado operativo en valor absoluto (USD 40.770 millones); el margen surge de dividirlo por los ingresos del trimestre. Texas Instruments encabeza el grupo.'},
+ yoy:{h:'Variación interanual',s:'Ingresos, utilidad neta y ganancia por acción frente al mismo trimestre de 2025',
+  n:'Las cuatro compañías ampliaron ingresos a tasas de entre 22 y 26 por ciento. Tesla es la única con utilidad y ganancia por acción en terreno negativo.'}
+};
+
+var cur='rev', adj=true;
+function el(i){return document.getElementById(i)}
+function val(k,m){
+  if(m==='ni') return adj?D[k].niA:D[k].ni;
+  if(m==='eps') return adj?D[k].epsA:D[k].eps;
+  return D[k][m];
+}
+
+function render(){
+  var m=M[cur];
+  el('hdr').textContent=m.h;
+  el('sub').textContent=m.s;
+  el('note').textContent=m.n;
+  var active=(cur==='ni'||cur==='eps');
+  el('adjwrap').style.opacity=active?'1':'0.35';
+  el('adjwrap').style.pointerEvents=active?'auto':'none';
+
+  var h='';
+  if(cur==='yoy'){
+    var mx=120;
+    for(var i=0;i<K.length;i++){
+      var k=K[i];
+      var rows=[['Ingresos',D[k].yr,'#2a78d6'],['Utilidad neta',D[k].yn,'#eb6834'],['EPS',D[k].ye,'#1baf7a']];
+      h+='<div class="grp"><div class="co"><span class="dot" style="background:'+C[k]+'"></span><span class="name">'+D[k].n+'</span><span class="tick">'+k+'</span></div>';
+      for(var j=0;j<rows.length;j++){
+        var r=rows[j], pos=r[1]>=0, w=Math.min(Math.abs(r[1]),mx)/mx*100;
+        h+='<div class="row" style="margin-bottom:5px"><div class="ylab">'+r[0]+'</div>'+
+           '<div class="ytrack"><div class="fill" style="width:'+w.toFixed(1)+'%;background:'+(pos?r[2]:'var(--neg)')+'"></div></div>'+
+           '<div class="yval" style="color:'+(pos?'var(--text-primary)':'var(--neg)')+'">'+(pos?'+':'−')+Math.abs(r[1]).toFixed(0)+'%</div></div>';
+      }
+      h+='</div>';
+    }
+  } else {
+    var vs=[],mxv=0;
+    for(var a=0;a<K.length;a++){ vs.push(val(K[a],cur)); if(vs[a]>mxv) mxv=vs[a]; }
+    for(var b=0;b<K.length;b++){
+      var kk=K[b], w2=vs[b]/mxv*100;
+      h+='<div class="grp"><div class="co"><span class="dot" style="background:'+C[kk]+'"></span><span class="name">'+D[kk].n+'</span><span class="tick">'+kk+'</span></div>'+
+         '<div class="row"><div class="track"><div class="fill" style="width:'+w2.toFixed(1)+'%;background:'+C[kk]+'"></div></div>'+
+         '<div class="val">'+m.f(vs[b])+'</div></div></div>';
+    }
+  }
+  el('rows').innerHTML=h;
+
+  var btns=document.querySelectorAll('#tabs button');
+  for(var c=0;c<btns.length;c++){
+    btns[c].className = (btns[c].getAttribute('data-m')===cur) ? 'on' : '';
+  }
+}
+
+var btns=document.querySelectorAll('#tabs button');
+for(var q=0;q<btns.length;q++){
+  btns[q].onclick=(function(b){return function(){cur=b.getAttribute('data-m');render()}})(btns[q]);
+}
+el('adj').onchange=function(e){adj=e.target.checked;render()};
+render();
+</script>
+</body>
+</html>
